@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Cantinho ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --fundo: #f8f5f1;
+      --texto: #403532;
+      --rosa: #b78378;
+      --detalhe: #e9d8cf;
+      --branco: #fffdfa;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      line-height: 1.25;
+    }
+
+    .hero {
+      min-height: 95vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(180deg, #f0e5de, var(--fundo));
+    }
+
+    .subtitulo {
+      color: var(--rosa);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 12px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 76px);
+      margin: 25px 0;
+    }
+
+    .hero p {
+      max-width: 520px;
+      color: #766963;
+    }
+
+    .nomes {
+      margin: 25px 0;
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: var(--rosa);
+      font-size: 23px;
+    }
+
+    .botao {
+      display: inline-block;
+      background: var(--rosa);
+      color: white;
+      padding: 13px 25px;
+      border: 1px solid var(--rosa);
+      border-radius: 30px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.25s;
+    }
+
+    .botao:hover {
+      background: #98675d;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 90px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .cabecalho {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .cabecalho h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin: 12px 0;
+    }
+
+    .cabecalho p {
+      color: #766963;
+    }
+
+    /* Galeria de fotos */
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .foto {
+      background: var(--branco);
+      border: 1px solid #e9e0da;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .foto img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .foto .placeholder {
+      height: 270px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      background: var(--detalhe);
+      color: #76574d;
+    }
+
+    .legenda {
+      padding: 20px;
+    }
+
+    .legenda h3 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .legenda p {
+      font-size: 14px;
+      color: #766963;
+    }
+
+    /* Linha do tempo */
+
+    .linha {
+      max-width: 700px;
+      margin: auto;
+      border-left: 2px solid var(--detalhe);
+      padding-left: 30px;
+    }
+
+    .momento {
+      position: relative;
+      margin-bottom: 38px;
+    }
+
+    .momento::before {
+      content: "";
+      position: absolute;
+      left: -38px;
+      top: 7px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--rosa);
+    }
+
+    .data {
+      color: var(--rosa);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .momento h3 {
+      font-size: 24px;
+      margin: 8px 0;
+    }
+
+    .momento p {
+      color: #766963;
+    }
+
+    /* Carta surpresa */
+
+    .carta-area {
+      background: #eee4dd;
+      text-align: center;
+    }
+
+    .carta {
+      max-width: 680px;
+      margin: auto;
+      padding: 40px;
+      background: var(--branco);
+      border: 1px solid #ddcbc0;
+      border-radius: 20px;
+    }
+
+    .carta h2 {
+      font-size: 40px;
+      margin: 15px 0;
+    }
+
+    #mensagem {
+      text-align: left;
+      white-space: pre-line;
+      margin-top: 30px;
+      color: #655751;
+    }
+
+    #mensagem[hidden] {
+      display: none;
+    }
+
+    .assinatura {
+      margin-top: 25px;
+      color: var(--rosa);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 22px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #887b75;
+      font-size: 14px;
+    }
+
+    /* Botão de música */
+
+    #musica {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10;
+      border: 1px solid #ddcbc0;
+      border-radius: 30px;
+      background: var(--branco);
+      color: var(--texto);
+      padding: 12px 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px #00000012;
+    }
+
+    @media (max-width: 700px) {
+      .galeria {
+        grid-template-columns: 1fr;
+        max-width: 430px;
+        margin: auto;
+      }
+
+      .foto img,
+      .foto .placeholder {
+        height: 300px;
+      }
+
+      section {
+        padding: 65px 20px;
+      }
+
+      .carta {
+        padding: 25px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- INÍCIO -->
+  <header class="hero">
+    <span class="subtitulo">Um lugar só nosso</span>
+
+    <h1>As coisas mais bonitas<br>têm um pouco de nós.</h1>
+
+    <p>
+      Um cantinho para guardar nossos dias especiais,
+      nossas pequenas coisas e todas as lembranças
+      que fazem nossa história ser única.
+    </p>
+
+    <div class="nomes">Daniel &amp; Vitória</div>
+
+    <a href="#memorias" class="botao">
+      Relembrar nossa história ↓
+    </a>
+  </header>
+
+  <main>
+
+    <!-- GALERIA -->
+    <section id="memorias">
+      <div class="container">
+        <div class="cabecalho">
+          <span class="subtitulo">Pequenos infinitos</span>
+          <h2>Momentos que são nossos</h2>
+          <p>
+            Cada foto guarda uma história que vale a pena lembrar.
+          </p>
+        </div>
+
+        <div class="galeria">
+
+          <article class="foto">
+            <!-- Coloque sua foto em fotos/foto1.jpg -->
+            <div class="placeholder">
+              <img src="Fotos/IMG_20230917_204830_259.webp" alt="">
+            </div>
+            <div class="legenda">
+              <h3>O começo de tudo</h3>
+              <p>Uma lembrança que sempre me faz sorrir.</p>
+            </div>
+          </article>
+
+          <article class="foto">
+            <!-- Coloque sua foto em fotos/foto2.jpg -->
+            <div class="placeholder">
+              <img src="Fotos/IMG_20240818_160450.jpg" alt="">
+            </div>
+            <div class="legenda">
+              <h3>Nossa "primeira" viagem juntos</h3>
+              <p>Com você, até o simples fica especial.</p>
+            </div>
+          </article>
+
+          <article class="foto">
+            <!-- Coloque sua foto em fotos/foto3.jpg -->
+            <div class="placeholder">
+              <img src="Fotos/IMG_20260503_204017_080.webp" alt="">
+            </div>
+            <div class="legenda">
+              <h3>Mais um capítulo</h3>
+              <p>E ainda temos tantas memórias para criar</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LINHA DO TEMPO -->
+    <section id="historia">
+      <div class="container">
+        <div class="cabecalho">
+          <span class="subtitulo">Capítulo por capítulo</span>
+          <h2>A nossa história</h2>
+          <p>
+            Os momentos que fizeram a gente chegar até aqui.
+          </p>
+        </div>
+
+        <div class="linha">
+
+          <article class="momento">
+            <span class="data">O dia em que tudo começou</span>
+            <h3>Quando nossos caminhos se cruzaram</h3>
+            <p>
+              Lembro como se fosse hoje... Quando você me ligou do nada em chamda de vídeo e começou a navegar no Omegle, eu sei que foi do nada mas ali meu objetivo era conquistar você
+            </p>
+          </article>
+
+          <article class="momento">
+            <span class="data">Uma data inesquecível</span>
+            <h3>O momento em que virou nós</h3>
+            <p>
+              Lembra no aniversário do Pedro? Pois é, ali já estamos "Namorando", mas foi ali que houve o primeiro pedido kkkkkk, bom, naquele dia eu lembro de ficar com borboletas na barriga e uma felicidadde GIGANTE KKKKK
+            </p>
+          </article>
+
+          <article class="momento">
+            <span class="data">Uma lembrança recente</span>
+            <h3>Mais um motivo para sorrir</h3>
+            <p>
+              Bom... Eu sou totalmente grato por ter você na minha vida, por a gente conseguir resolver nossas intrigas na base da conversa (mesmo que em alugumas nós parecemos criançaskk), por você me entender e me ouvir, eu sempre sou e serei muito feliz por essa escolha que fiz na minha vida pois eu amo você, sempre irei amas... Até que a morte nos separe...
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTA SURPRESA -->
+    <section class="carta-area" id="carta">
+      <div class="carta">
+        <span class="subtitulo">Um pedacinho do meu coração</span>
+
+        <h2>Uma carta para você</h2>
+
+        <p>
+          Tem coisas que merecem ser ditas
+          com calma, do jeitinho que a gente sente.
+        </p>
+
+        <br>
+
+        <button
+          class="botao"
+          id="abrirCarta"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mensagem"
+        >
+          Abrir minha carta 💌
+        </button>
+
+        <div id="mensagem" hidden>
+Meu amor,
+
+Se eu pudesse guardar cada momento feliz em algum lugar, escolheria guardar todos pertinho de mim, porque em cada um deles existe um pouco de você.
+
+Obrigado por fazer parte da minha vida, pelas risadas, pelo carinho e até pelas pequenas coisas que talvez você nem perceba, mas que significam tanto para mim.
+
+Este site é minha maneira de dizer que a nossa história é importante para mim.
+
+Quero continuar criando memórias ao seu lado, uma por uma. Ainda temos muitos capítulos pela frente, e mal posso esperar para viver cada um deles com você.
+
+          <div class="assinatura">
+            Com todo o meu amor, sempre. ♡
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Feito com carinho, pensando em você. ♥
+  </footer>
+
+  <button id="musica" type="button" aria-pressed="false">
+    ♫ <span id="textoMusica">Tocar música</span>
+  </button>
+
+  <script>
+    // ABRIR E FECHAR A CARTA
+
+    const botaoCarta = document.getElementById("abrirCarta");
+    const mensagem = document.getElementById("mensagem");
+
+    botaoCarta.addEventListener("click", () => {
+      const abrir = mensagem.hidden;
+
+      mensagem.hidden = !abrir;
+
+      botaoCarta.setAttribute("aria-expanded", String(abrir));
+
+      botaoCarta.textContent = abrir
+        ? "Fechar minha carta ♡"
+        : "Abrir minha carta 💌";
+    });
+
+
+    // MÚSICA AMBIENTE GERADA PELO NAVEGADOR
+
+    let contextoAudio;
+    let ganho;
+    let tocando = false;
+    let temporizador;
+    let indice = 0;
+
+    const notas = [
+      261.63, 329.63, 392.00, 329.63,
+      293.66, 349.23, 392.00, 349.23
+    ];
+
+    const botaoMusica = document.getElementById("musica");
+    const textoMusica = document.getElementById("textoMusica");
+
+    function tocarNota() {
+      if (!contextoAudio || !ganho || !tocando) return;
+
+      const oscilador = contextoAudio.createOscillator();
+      const volume = contextoAudio.createGain();
+
+      oscilador.type = "sine";
+      oscilador.frequency.value = notas[indice % notas.length];
+
+      volume.gain.setValueAtTime(
+        0.0001,
+        contextoAudio.currentTime
+      );
+
+      volume.gain.exponentialRampToValueAtTime(
+        0.04,
+        contextoAudio.currentTime + 0.08
+      );
+
+      volume.gain.exponentialRampToValueAtTime(
+        0.0001,
+        contextoAudio.currentTime + 1
+      );
+
+      oscilador.connect(volume);
+      volume.connect(ganho);
+
+      oscilador.start();
+      oscilador.stop(contextoAudio.currentTime + 1.05);
+
+      indice++;
+    }
+
+    async function alternarMusica() {
+      if (!contextoAudio) {
+        const AudioContext =
+          window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContext) {
+          textoMusica.textContent = "Áudio indisponível";
+          return;
+        }
+
+        contextoAudio = new AudioContext();
+        ganho = contextoAudio.createGain();
+        ganho.gain.value = 0.6;
+        ganho.connect(contextoAudio.destination);
+      }
+
+      if (contextoAudio.state === "suspended") {
+        await contextoAudio.resume();
+      }
+
+      tocando = !tocando;
+
+      if (tocando) {
+        tocarNota();
+
+        temporizador = setInterval(tocarNota, 650);
+
+        textoMusica.textContent = "Pausar música";
+      } else {
+        clearInterval(temporizador);
+
+        textoMusica.textContent = "Tocar música";
+      }
+
+      botaoMusica.setAttribute("aria-pressed", String(tocando));
+    }
+
+    botaoMusica.addEventListener("click", alternarMusica);
+  </script>
+
+</body>
+</html>
